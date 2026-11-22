@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Noel'ist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#efe2c6; --paper-2:#e7d6b2;
+  --ink:#a3342a; --ink-dark:#7c2219; --ink-soft:#a8695c; --text:#5a2a20;
+  --holly:#1f3d33; --berry:#b3202a; --line:rgba(163,52,42,.22);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:#3a2417 radial-gradient(ellipse at center,#5a3a24 0%,#24150c 100%) fixed;
+  color:var(--text); font-family:"Kalam","Comic Sans MS",cursive; font-size:19px; line-height:1.5;
+  min-height:100vh; padding:max(28px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(60px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+}
+.sheet{
+  position:relative; max-width:820px; margin:0 auto; padding:54px 60px 70px;
+  background:
+    radial-gradient(ellipse at 15% 8%,rgba(255,255,255,.45),transparent 50%),
+    radial-gradient(ellipse at 90% 95%,rgba(150,100,40,.18),transparent 55%),
+    radial-gradient(circle at 78% 40%,rgba(170,120,60,.08) 0 4%,transparent 5%),
+    radial-gradient(circle at 10% 70%,rgba(170,120,60,.10) 0 6%,transparent 7%),
+    linear-gradient(180deg,var(--paper),var(--paper-2));
+  box-shadow:inset 0 0 70px rgba(140,90,30,.35), inset 0 0 14px rgba(110,70,20,.35), 0 18px 50px rgba(0,0,0,.6);
+  clip-path:polygon(0 1%,3% 0,9% .6%,16% 0,24% .8%,33% .1%,41% .7%,50% 0,58% .9%,67% .2%,75% .8%,84% 0,92% .7%,100% .2%,99.4% 9%,100% 20%,99.3% 32%,100% 45%,99.5% 58%,100% 71%,99.2% 84%,100% 99%,93% 99.6%,85% 99%,76% 100%,67% 99.3%,58% 100%,49% 99.2%,40% 100%,31% 99.4%,22% 100%,13% 99.3%,5% 100%,0 99%,.6% 86%,0 73%,.7% 60%,0 47%,.5% 34%,0 21%,.6% 10%);
+}
+.sheet::before{content:""; position:absolute; inset:0; pointer-events:none; opacity:.28; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .35  0 0 0 0 .15  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");}
+.sheet>*{position:relative}
+.holly{position:absolute; top:18px; right:26px; width:120px; height:auto}
+.hand{font-family:"Mountains of Christmas",cursive; color:var(--ink); font-weight:700}
+.from{font-family:"Mountains of Christmas",cursive; color:var(--ink); line-height:1.15; font-size:1.25rem; margin-left:22%}
+.from .year{display:block; font-size:2.6rem; margin-left:40%; letter-spacing:.05em}
+h1{font-family:"Mountains of Christmas",cursive; font-weight:700; font-size:4.2rem; line-height:1; margin:18px 0 0; color:var(--ink)}
+.sub{display:block; color:var(--ink-soft); font-size:1.15rem; margin:-2px 0 4px 4px; padding:0; border:none; background:none; text-align:left; border-radius:0}
+.sub:hover{background:none; color:var(--ink)}
+.sub .pen{font-size:.85rem; opacity:.55}
+.squiggle{display:block; width:220px; max-width:60%; color:var(--ink); margin:4px 0 18px 30px}
+.totals{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:0 0 14px; padding:12px 14px; border:1.5px solid var(--ink); border-radius:255px 15px 225px 15px/15px 225px 15px 255px; background:rgba(255,250,235,.3)}
+.totals div{text-align:center}
+.totals small{display:block; color:var(--ink-soft); font-size:.9rem}
+.totals b{font-family:"Kalam",cursive; font-weight:700; color:var(--ink); font-size:1.4rem}
+.totals .link{display:block; margin:0 auto}
+@media (max-width:600px){.totals{grid-template-columns:1fr 1fr}}
+.summary{display:flex; gap:24px; flex-wrap:wrap; color:var(--ink-soft); font-size:1rem; margin:0 0 22px}
+.summary b{color:var(--ink); font-size:1.15rem}
+
+button{font-family:"Kalam",cursive; font-size:1rem; cursor:pointer; color:var(--ink); background:rgba(255,250,235,.35);
+  border:1.5px solid var(--ink); border-radius:255px 15px 225px 15px/15px 225px 15px 255px; padding:4px 16px}
+button:hover{background:rgba(255,250,235,.75)}
+button.primary{background:var(--ink); color:#fbefd8}
+button.primary:hover{background:var(--ink-dark)}
+button.link{border:none; background:none; padding:2px 6px; color:var(--ink-soft); text-decoration:underline wavy rgba(163,52,42,.4); text-underline-offset:4px; font-size:.95rem}
+button:disabled{opacity:.4; cursor:default}
+input,textarea{font-family:"Kalam",cursive; font-size:1.05rem; color:var(--text); width:100%;
+  background:transparent; border:none; border-bottom:1.5px dashed var(--ink-soft); padding:4px 4px; outline:none}
+input:focus,textarea:focus{background:rgba(255,250,235,.55); border-bottom-style:solid; border-bottom-color:var(--ink)}
+input::placeholder,textarea::placeholder{color:#c2988b}
+label{display:block; font-size:.9rem; color:var(--ink-soft); margin-top:12px}
+.row{display:flex; gap:14px; flex-wrap:wrap}
+.row>*{flex:1 1 150px}
+
+.add-person{display:flex; gap:12px; align-items:flex-end; margin-bottom:18px}
+.add-person input{font-size:1.3rem}
+
+/* lista de pessoas */
+.people{list-style:none; margin:0; padding:0}
+.people li{display:flex; align-items:baseline; gap:12px; padding:8px 4px; border-bottom:1px solid var(--line); cursor:pointer}
+.people li:hover{background:rgba(255,250,235,.35)}
+.people .n{font-family:"Mountains of Christmas",cursive; color:var(--ink); font-size:1.4rem; min-width:1.6em}
+.people .name{font-family:"Mountains of Christmas",cursive; font-weight:700; color:var(--ink); font-size:2rem; line-height:1.1}
+.people .rel{color:var(--ink-soft); font-size:1rem}
+.people .info{margin-left:auto; color:var(--ink-soft); font-size:1rem; white-space:nowrap; text-align:right}
+.tick{color:var(--holly); font-weight:700}
+.empty{color:var(--ink-soft); font-style:italic; padding:6px 0}
+
+/* página da pessoa */
+.back{margin-bottom:10px}
+.p-head{display:flex; gap:12px; align-items:baseline; flex-wrap:wrap}
+.p-head h1{margin-top:8px}
+.p-meta{color:var(--ink-soft)}
+.budget{display:flex; gap:22px; flex-wrap:wrap; margin:6px 0 4px; font-size:1.05rem}
+.budget b{color:var(--ink)}
+.over{color:var(--berry); font-weight:700}
+.p-tools{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 18px}
+.ideas{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:26px 22px; margin-top:8px}
+.idea{position:relative; background:rgba(255,252,240,.45); padding:12px 12px 10px; border:1px solid rgba(163,52,42,.18);
+  box-shadow:2px 3px 0 rgba(120,70,30,.12)}
+.idea:nth-child(3n+1){transform:rotate(-.6deg)} .idea:nth-child(3n+2){transform:rotate(.5deg)}
+.idea .photo{aspect-ratio:4/3; background:#e6d3ab; display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:zoom-in; border:5px solid #fbf3df; box-shadow:0 1px 4px rgba(70,35,10,.3)}
+.idea .photo img{width:100%; height:100%; object-fit:contain; background:#fff}
+.idea .photo.none{cursor:default; color:var(--ink-soft); font-family:"Mountains of Christmas",cursive; font-size:1.2rem}
+.idea h3{font-family:"Kalam",cursive; font-weight:700; color:var(--ink); font-size:1.2rem; line-height:1.25; margin:10px 0 2px}
+.idea.bought h3{text-decoration:line-through wavy var(--holly)}
+.idea .store{font-size:.95rem; color:var(--text)}
+.idea .store a{color:var(--holly)}
+.idea .price{font-family:"Kalam",cursive; font-weight:700; color:var(--ink); font-size:1.3rem; line-height:1.3}
+.idea .price small{font-family:"Kalam",cursive; font-weight:300; font-size:.85rem; color:var(--ink-soft)}
+.idea .notes{font-size:.95rem; color:var(--text); white-space:pre-wrap}
+.idea .acts{display:flex; flex-wrap:wrap; margin:6px -6px 0}
+.stamp{position:absolute; top:18px; right:-6px; transform:rotate(12deg); font-family:"Mountains of Christmas",cursive; font-weight:700;
+  color:var(--holly); border:2.5px solid var(--holly); border-radius:6px; padding:0 8px; background:rgba(239,226,198,.85); font-size:1.1rem}
+.add-card{display:flex; align-items:center; justify-content:center; min-height:200px; border:2px dashed var(--ink-soft); cursor:pointer;
+  font-family:"Mountains of Christmas",cursive; font-weight:700; color:var(--ink); font-size:1.6rem; background:transparent}
+.add-card:hover{background:rgba(255,250,235,.4)}
+
+footer{margin-top:40px; text-align:center; font-size:.95rem; color:var(--ink-soft)}
+footer .tools{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:8px}
+
+/* janelas */
+dialog{border:none; padding:0; background:transparent; max-width:min(580px,94vw); width:100%}
+dialog::backdrop{background:rgba(30,15,8,.65)}
+.card{background:linear-gradient(180deg,#f4e9d1,#eadbb9); padding:24px 28px; box-shadow:inset 0 0 40px rgba(140,90,30,.3),0 10px 40px rgba(0,0,0,.5); color:var(--text); max-height:92vh; overflow:auto}
+.card h2{font-family:"Mountains of Christmas",cursive; font-weight:700; color:var(--ink); font-size:2.2rem; margin:0 0 4px; line-height:1.1}
+.card .actions{display:flex; justify-content:flex-end; gap:10px; margin-top:20px}
+.linkrow{display:flex; gap:8px; align-items:flex-end}
+.linkrow input{flex:1}
+.status{font-size:.9rem; min-height:1.4em; margin-top:4px; color:var(--ink-soft)}
+.status.ok{color:var(--holly)} .status.bad{color:var(--berry)}
+.seg{display:flex; gap:8px; flex-wrap:wrap; margin-top:6px}
+.seg label{margin:0; cursor:pointer; border:1.5px solid var(--ink-soft); border-radius:255px 15px 225px 15px/15px 225px 15px 255px; padding:2px 12px; color:var(--ink-soft)}
+.seg input{display:none}
+.seg label:has(input:checked){border-color:var(--ink); color:var(--ink); background:rgba(255,250,235,.75); font-weight:700}
+.preview{margin-top:8px; display:flex; gap:10px; align-items:center}
+.preview img{width:90px; height:70px; object-fit:contain; background:#fff; border:3px solid #fbf3df}
+.check{display:flex; align-items:center; gap:8px; margin-top:14px}
+.check input{width:auto; transform:scale(1.3)}
+.check label{margin:0; color:var(--text)}
+#viewer .card{padding:10px; text-align:center; cursor:zoom-out}
+#viewer img{max-width:100%; max-height:80vh}
+
+@media (max-width:600px){
+  body{padding:max(12px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(40px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left)); font-size:18px}
+  .sheet{padding:40px 20px 50px}
+  .holly{width:80px; right:12px}
+  h1{font-size:3.2rem}
+  .from{margin-left:0}
+  .add-person{flex-direction:column; align-items:stretch}
+  .people li{flex-wrap:wrap}
+  .people .info{margin-left:2.2em; text-align:left}
+}
+
+.login{position:fixed; inset:0; z-index:40; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(30,15,8,.85)}
+.login[hidden]{display:none}
+.login .card{max-width:440px; width:100%}
+/* abertura: pergaminho enrolado */
+#intro{position:fixed; inset:0; z-index:50; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px;
+  background:radial-gradient(ellipse at center,#5a3a24 0%,#1d1009 100%); touch-action:none; user-select:none; transition:opacity .6s ease .1s}
+#intro.gone{opacity:0; pointer-events:none}
+.scroll{position:relative; width:min(78vw,360px); height:96px; display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+  transition:height 1.1s cubic-bezier(.6,.05,.25,1)}
+.roller{position:relative; z-index:2; width:108%; height:44px; border-radius:22px;
+  background:linear-gradient(180deg,#c9ad7c 0%,#f3e4c4 30%,#e6d2a8 55%,#a7834e 100%); box-shadow:0 6px 14px rgba(0,0,0,.5)}
+.roller::before,.roller::after{content:""; position:absolute; top:6px; width:20px; height:32px; border-radius:50%;
+  background:radial-gradient(circle at 45% 45%,#8a5b2c 0 28%,#5a3518 30% 60%,#3a200c 62%)}
+.roller::before{left:-8px} .roller::after{right:-8px}
+.scroll .paper{position:absolute; z-index:1; left:2%; right:2%; top:22px; bottom:22px;
+  background:linear-gradient(180deg,#e8d6ae,#efe2c6 15%,#efe2c6 85%,#e3cfa3); box-shadow:inset 0 0 30px rgba(140,90,30,.35);
+  display:flex; align-items:center; justify-content:center; overflow:hidden}
+.scroll .paper span small{display:block; font-family:"Kalam",cursive; font-weight:400; font-size:1.05rem; color:var(--ink-soft); text-align:center; padding:0 18px; margin-top:6px}
+.scroll .paper span{text-align:center; font-family:"Mountains of Christmas",cursive; font-weight:700; color:var(--ink); font-size:3rem; opacity:0; transition:opacity .5s .7s}
+.seal{position:absolute; z-index:3; top:50%; left:50%; width:58px; height:58px; margin:-29px 0 0 -29px; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#d0453b,#9c1d16 60%,#6e110c); box-shadow:0 3px 8px rgba(0,0,0,.5), inset 0 0 0 5px rgba(0,0,0,.12);
+  display:flex; align-items:center; justify-content:center; color:#f5d9c0; font-family:"Mountains of Christmas",cursive; font-weight:700; font-size:1.8rem;
+  transition:transform .4s, opacity .4s}
+.ribbon{position:absolute; z-index:2; top:50%; left:50%; width:16px; height:70px; margin-left:-8px; background:#8e1b17; transform-origin:top; transition:opacity .3s}
+.ribbon.r1{transform:rotate(18deg)} .ribbon.r2{transform:rotate(-18deg)}
+.swipe-hint{color:#e9d6b0; font-family:"Kalam",cursive; font-size:1.1rem; text-align:center; display:flex; flex-direction:column; align-items:center; gap:4px;
+  background:none; border:none; cursor:pointer}
+.swipe-hint .arrow{font-size:1.8rem; animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+#intro.opening .seal{transform:scale(.3) rotate(40deg); opacity:0}
+#intro.opening .ribbon{opacity:0}
+#intro.opening .swipe-hint{opacity:0}
+#intro.opening .scroll{height:min(70vh,520px)}
+#intro.opening .paper span{opacity:1}
+@media (prefers-reduced-motion:reduce){.scroll,#intro,.paper span{transition:none!important}.swipe-hint .arrow{animation:none}}
+@media print{
+  body{background:none;padding:0} .sheet{box-shadow:none;clip-path:none}
+  button,.add-person,footer .tools,.p-tools,.add-card,.idea .acts{display:none!important}
+}
+</style>
+</head>
+<body>
+<div id="intro" aria-label="Abertura">
+  <div class="scroll" id="scrollRoll">
+    <div class="roller"></div>
+    <div class="paper"><span>Noel'ist<small id="introSub"></small></span></div>
+    <div class="ribbon r1"></div><div class="ribbon r2"></div>
+    <div class="seal">N</div>
+    <div class="roller"></div>
+  </div>
+  <button class="swipe-hint" id="openScroll" type="button"><span class="arrow">↑</span>deslize para cima para abrir</button>
+</div>
+<main class="sheet">
+  <svg class="holly" viewBox="0 0 120 90" aria-hidden="true">
+    <g fill="#1f3d33">
+      <path d="M58 46 C40 30 22 34 8 20 c8 2 10-6 16-2 c-2-6 6-8 8-3 c2-6 9-4 9 1 c4-4 10 0 8 5 c6 0 8 6 3 9 c6 3 4 10 6 16z"/>
+      <path d="M62 44 C76 26 94 26 110 10 c-8 3-9-5-15-1 c1-6-7-7-8-2 c-3-6-10-3-9 2 c-5-3-10 1-8 6 c-6 1-7 7-2 9 c-6 4-3 10-6 20z"/>
+      <path d="M60 50 C66 64 60 78 66 90 c-3-6-9-2-10-7 c-4 4-9-1-6-5 c-6 0-6-7-1-8 c-4-4 0-9 4-7 c-1-6 6-7 7-13z"/>
+    </g>
+    <path d="M60 46 L52 88" stroke="#1f3d33" stroke-width="2.5"/>
+    <g fill="#b3202a"><circle cx="58" cy="44" r="5"/><circle cx="66" cy="49" r="4.5"/><circle cx="55" cy="52" r="4.5"/></g>
+  </svg>
+  <div id="app"></div>
+  <footer>
+    <div id="storageNote">Fica tudo guardado só neste navegador, neste computador.</div>
+    <div class="tools">
+      <button type="button" id="exportBtn">Guardar cópia de segurança</button>
+      <button type="button" id="importBtn">Recuperar cópia</button>
+      <button type="button" id="logoutBtn" hidden>Sair da conta</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </div>
+  </footer>
+</main>
+
+<!-- janela: pessoa -->
+<dialog id="personDlg"><form class="card" method="dialog" id="personForm">
+  <h2>Sobre esta pessoa</h2>
+  <label>Nome</label><input name="name" required>
+  <label>Quem é (opcional)</label><input name="relation" placeholder="irmã, colega, afilhado…">
+  <label>Orçamento para esta pessoa, em € (opcional)</label><input name="budget" type="number" min="0" step="0.01" inputmode="decimal">
+  <label>Notas (tamanhos, gostos, o que já tem…)</label><textarea name="notes" rows="3"></textarea>
+  <div class="actions"><button value="cancel" formnovalidate>Cancelar</button><button class="primary" value="ok">Guardar</button></div>
+</form></dialog>
+
+<!-- janela: ideia -->
+<dialog id="ideaDlg"><form class="card" method="dialog" id="ideaForm">
+  <h2 id="ideaDlgTitle">Nova ideia</h2>
+  <label>Link do produto (opcional)</label>
+  <div class="linkrow"><input name="link" type="url" placeholder="cole aqui o link da loja…"><button type="button" id="fetchBtn">Ir buscar</button></div>
+  <div class="status" id="fetchStatus"></div>
+  <label>Prenda ou ideia</label><input name="title" required placeholder="ex.: Livro de receitas italianas">
+  <label>Loja</label><input name="store" placeholder="ex.: Fnac, Worten, feira de Natal…">
+  <label>Valor</label>
+  <div class="seg">
+    <label><input type="radio" name="priceMode" value="fixed">preço certo</label>
+    <label><input type="radio" name="priceMode" value="range">entre mínimo e máximo</label>
+    <label><input type="radio" name="priceMode" value="none" checked>sem valor</label>
+  </div>
+  <div class="row" id="fixedRow"><div><label>Preço (€)</label><input name="price" type="number" min="0" step="0.01" inputmode="decimal"></div></div>
+  <div class="row" id="rangeRow"><div><label>Mínimo (€)</label><input name="min" type="number" min="0" step="0.01" inputmode="decimal"></div><div><label>Máximo (€)</label><input name="max" type="number" min="0" step="0.01" inputmode="decimal"></div></div>
+  <label>Imagem</label>
+  <input type="file" name="photoFile" accept="image/*">
+  <input name="photoUrl" type="url" placeholder="…ou o endereço de uma imagem" style="margin-top:6px">
+  <div class="preview" id="photoPreview"></div>
+  <label>Notas</label><textarea name="notes" rows="2" placeholder="cor, tamanho, alternativa…"></textarea>
+  <div class="check"><input type="checkbox" name="bought" id="boughtChk"><label for="boughtChk">Já comprei</label></div>
+  <div id="paidRow" style="display:none"><label>Quanto paguei (€)</label><input name="paid" type="number" min="0" step="0.01" inputmode="decimal" placeholder="se for diferente do preço"></div>
+  <div class="actions"><button value="cancel" formnovalidate>Cancelar</button><button class="primary" value="ok">Guardar</button></div>
+</form></dialog>
+
+<div id="login" class="login" hidden><form class="card" id="loginForm">
+  <h2>Entrar na Noel'ist</h2>
+  <p style="margin:0">Cada um usa o seu próprio email. A lista é a mesma para os dois.</p>
+  <label for="loginEmail">Email</label><input id="loginEmail" type="email" autocomplete="email" required>
+  <label for="loginPass">Palavra-passe</label><input id="loginPass" type="password" autocomplete="current-password" required minlength="6">
+  <div class="status bad" id="loginMsg"></div>
+  <div class="actions" style="justify-content:space-between;flex-wrap:wrap">
+    <button type="button" class="link" id="resetBtn">esqueci-me da palavra-passe</button>
+    <span style="display:flex;gap:8px"><button type="button" id="signupBtn">Criar conta</button><button class="primary" type="submit">Entrar</button></span>
+  </div>
+</form></div>
+
+<dialog id="askDlg"><form class="card" method="dialog" id="askForm">
+  <p id="askMsg" style="font-size:1.15rem;margin:0 0 6px"></p>
+  <input id="askInput" name="v" type="number" min="0" step="0.01" inputmode="decimal" hidden>
+  <div class="actions"><button value="cancel" formnovalidate id="askCancel">Cancelar</button><button class="primary" value="ok" id="askOk">Sim</button></div>
+</form></dialog>
+
+<dialog id="viewer"><div class="card" onclick="this.closest('dialog').close()"><img alt=""></div></dialog>
+
+<script>
+const KEY='noelist.v1';
+const $=s=>document.querySelector(s);
+const eur=n=>new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(n||0);
+const num=v=>{if(v==null)return null;const n=parseFloat(String(v).replace(/\s/g,'').replace(',','.'));return isNaN(n)?null:n};
+const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const host=u=>{try{return new URL(u).hostname.replace(/^www\./,'')}catch(e){return ''}};
+const SQUIGGLE='<svg class="squiggle" viewBox="0 0 220 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12 C30 4 40 20 70 12 S110 4 140 14 S190 20 200 10 c6-6 14 0 10 6 c-3 4-8 0-5-3"/></svg>';
+
+// janela de confirmação própria (os alert/confirm do navegador não funcionam em todo o lado)
+function ask(msg,{input=false,value='',ok='Sim',cancel='Cancelar'}={}){
+  return new Promise(res=>{
+    const d=$('#askDlg');$('#askMsg').textContent=msg;$('#askOk').textContent=ok;$('#askCancel').textContent=cancel;
+    $('#askCancel').hidden=!cancel;const inp=$('#askInput');inp.hidden=!input;inp.type=input==='text'?'text':'number';inp.placeholder=input==='text'?'ex.: Lista da Casa do Ricardo, Patrícia e Francisca':'';inp.value=value;
+    d.onclose=()=>res(d.returnValue==='ok'?(input?inp.value:true):(input?null:false));
+    d.returnValue='';d.showModal();if(input)inp.focus();
+  });
+}
+const tell=msg=>ask(msg,{ok:'Está bem',cancel:''});
+
+/* ---------- fotografias ---------- */
+const photoCache={};
+const photoSrc=v=>!v?'':v.startsWith('ph:')?(photoCache[v.slice(3)]||''):v;
+const imgTag=(v,extra='')=>`<img src="${esc(photoSrc(v))}" ${v.startsWith('ph:')?`data-ph="${esc(v)}"`:''} alt="" ${extra} referrerpolicy="no-referrer">`;
+async function photoLoad(v){
+  if(!v||!v.startsWith('ph:'))return v||'';const id=v.slice(3);
+  if(photoCache[id]!=null)return photoCache[id];
+  if(!fb)return '';
+  try{const sn=await fb.fs.doc('fotos/'+id).get();photoCache[id]=sn.exists?sn.data().d:''}catch(e){return ''}
+  return photoCache[id];
+}
+function fillPhotos(){document.querySelectorAll('img[data-ph]').forEach(img=>{if(!img.getAttribute('src'))photoLoad(img.dataset.ph).then(d=>{if(d)img.src=d})})}
+
+/* ---------- guardar ---------- */
+let state={people:[]}, cloud=null, assets=null, downloads=null, fb=null;
+function readLocal(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.people))return s}catch(e){}return null}
+state=readLocal()||state;
+let saveTimer=null, saving=Promise.resolve();
+function save(){
+  let ok=true;
+  try{localStorage.setItem(KEY,JSON.stringify(state))}
+  catch(e){if(!cloud){ok=false;tell('Já não há espaço para guardar mais. Experimente usar o endereço da imagem em vez de carregar o ficheiro.')}}
+  if(cloud){clearTimeout(saveTimer);saveTimer=setTimeout(()=>{saveTimer=null;const snap=JSON.parse(JSON.stringify(state));
+    saving=saving.then(()=>cloud.set(snap)).catch(()=>tell('Não consegui guardar as últimas alterações. Verifique a ligação à internet.'))},500)}
+  return ok;
+}
+function setIntroSub(){const e=$('#introSub');if(e)e.textContent=state.subtitle||''}
+function applyRemote(d){
+  if(!d||!Array.isArray(d.people))return;
+  if(JSON.stringify(d)===JSON.stringify(state))return;
+  state=d;try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}
+  setIntroSub();
+}
+/* ---------- Firebase (versão instalável) ---------- */
+const AUTH_ERR={'auth/invalid-credential':'Email ou palavra-passe errados.','auth/wrong-password':'Email ou palavra-passe errados.','auth/user-not-found':'Ainda não há conta com este email. Use "Criar conta".',
+  'auth/email-already-in-use':'Já existe uma conta com este email. Use "Entrar".','auth/weak-password':'A palavra-passe precisa de pelo menos 6 caracteres.',
+  'auth/invalid-email':'Este email não parece estar bem escrito.','auth/missing-password':'Falta a palavra-passe.','auth/network-request-failed':'Sem ligação à internet.','auth/too-many-requests':'Demasiadas tentativas. Espere um pouco e tente de novo.'};
+function initFirebase(cfg){
+  firebase.initializeApp(cfg);
+  const auth=firebase.auth(), fs=firebase.firestore();
+  if(window.__NOELIST_EMU){auth.useEmulator('http://127.0.0.1:9099');fs.useEmulator('127.0.0.1',8080)}
+  if(!window.__NOELIST_EMU)fs.enablePersistence({synchronizeTabs:true}).catch(()=>{});
+  fb={fs,auth};
+  const ref=fs.doc('listas/familia'); let unsub=null;
+  const L=$('#login'), msg=t=>{$('#loginMsg').textContent=t||''};
+  auth.onAuthStateChanged(u=>{
+    if(unsub){unsub();unsub=null}
+    $('#logoutBtn').hidden=!u;
+    if(!u){cloud=null;L.hidden=false;return}
+    L.hidden=true;msg('');
+    cloud={set:d=>ref.set(d)};
+    $('#storageNote').textContent='A lista é partilhada. Entrou como '+u.email+'.';
+    let first=true;
+    unsub=ref.onSnapshot(sn=>{
+      if(!sn.exists){if(first&&state.people.length)save();first=false;return}
+      first=false;
+      if(sn.metadata.hasPendingWrites||saveTimer)return;
+      applyRemote(sn.data());if(!document.querySelector('dialog[open]'))render();
+    },err=>{
+      if(err.code==='permission-denied'){cloud=null;tell('Esta conta ainda não tem acesso à lista. Confirme que o email '+u.email+' está escrito nas regras do Firebase (passo 4 do guia).')}
+    });
+  });
+  const go=async create=>{
+    const e=$('#loginEmail').value.trim(), pw=$('#loginPass').value;msg('');
+    try{create?await auth.createUserWithEmailAndPassword(e,pw):await auth.signInWithEmailAndPassword(e,pw)}
+    catch(err){msg(AUTH_ERR[err.code]||err.message)}
+  };
+  $('#loginForm').onsubmit=e=>{e.preventDefault();go(false)};
+  $('#signupBtn').onclick=()=>go(true);
+  $('#resetBtn').onclick=async()=>{const e=$('#loginEmail').value.trim();if(!e){msg('Escreva primeiro o seu email.');return}
+    try{await auth.sendPasswordResetEmail(e);msg('Enviei-lhe um email para mudar a palavra-passe.')}catch(err){msg(AUTH_ERR[err.code]||err.message)}};
+  $('#logoutBtn').onclick=async()=>{if(await ask('Sair da conta neste telemóvel?',{ok:'Sair'}))auth.signOut()};
+}
+
+async function initCloud(){
+  const cfg=window.NOELIST_FIREBASE;
+  if(cfg&&window.firebase){
+    if(String(cfg.apiKey||'').startsWith('COLE')){$('#storageNote').textContent='Falta ligar ao Firebase (ficheiro config.js). Por agora fica só neste telemóvel.';return}
+    return initFirebase(cfg);
+  }
+  if(!window.claude||!window.claude.use)return;
+  try{
+    const db=await claude.use('db');
+    if(db){
+      // uma lista partilhada por todos os que têm acesso (o Ricardo e a mulher)
+      cloud=db.doc('data/lista');
+      const snap=await cloud.get();
+      if(snap.exists){applyRemote(snap.data())}
+      else if(state.people.length)await cloud.set(JSON.parse(JSON.stringify(state)));
+      $('#storageNote').textContent='A lista é partilhada: o que um acrescenta, o outro vê logo.';
+      render();
+      cloud.onSnapshot(sn=>{if(!sn.exists||sn.metadata.hasPendingWrites||saveTimer)return;applyRemote(sn.data());
+        if(!document.querySelector('dialog[open]'))render()},()=>{});
+    }
+  }catch(e){cloud=null}
+  try{assets=await claude.use('assets')}catch(e){}
+  try{downloads=await claude.use('downloads')}catch(e){}
+}
+
+function ideaValue(i){
+  if(i.priceMode==='fixed'&&i.price!=null)return[i.price,i.price];
+  if(i.priceMode==='range'){const a=i.min??i.max,b=i.max??i.min;if(a!=null)return[a,b]}
+  return[0,0];
+}
+const spentOf=i=>!i.bought?0:(i.paid??(i.priceMode==='fixed'?i.price:null)??(i.priceMode==='range'?(i.min??i.max):null)??0);
+const spentSum=ideas=>ideas.reduce((t,i)=>t+spentOf(i),0);
+const sumIdeas=ideas=>ideas.reduce((t,i)=>{const[a,b]=ideaValue(i);return[t[0]+a,t[1]+b]},[0,0]);
+const rangeTxt=([a,b])=>a===b?eur(a):`${eur(a)} a ${eur(b)}`;
+function priceHtml(i){
+  if(i.priceMode==='fixed'&&i.price!=null)return eur(i.price);
+  if(i.priceMode==='range'&&(i.min!=null||i.max!=null)){
+    if(i.min!=null&&i.max!=null)return `<small>entre</small> ${eur(i.min)} <small>e</small> ${eur(i.max)}`;
+    return i.min!=null?`<small>a partir de</small> ${eur(i.min)}`:`<small>até</small> ${eur(i.max)}`;
+  }
+  return '<small>sem valor definido</small>';
+}
+
+/* ---------- vistas ---------- */
+function route(){const m=location.hash.match(/^#p-(.+)$/);return m?state.people.find(p=>p.id===m[1]):null}
+function render(){
+  const p=route();
+  if(location.hash.startsWith('#p-')&&!p){location.hash='';return}
+  p?renderPerson(p):renderHome();
+  fillPhotos();
+}
+window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0)});
+
+function renderHome(){
+  document.title="Noel'ist";
+  const all=state.people.flatMap(p=>p.ideas), bought=all.filter(i=>i.bought).length, spentAll=spentSum(all);
+  $('#app').innerHTML=`
+    <div class="from">Casa do Natal<br>Pólo Norte<span class="year">${new Date().getFullYear()}</span></div>
+    <h1>Noel'ist</h1>
+    <button type="button" class="sub" id="editSub" title="Toque para mudar">${esc(state.subtitle||'a minha lista de prendas e desejos')} <span class="pen">✎</span></button>
+    ${SQUIGGLE}
+    <div class="totals">
+      <div><small>orçamento de Natal</small><b>${state.budget!=null?eur(state.budget):'—'}</b><button class="link" id="editBudget">${state.budget!=null?'mudar':'definir'}</button></div>
+      <div><small>já gastei</small><b class="${state.budget!=null&&spentAll>state.budget?'over':''}">${eur(spentAll)}</b></div>
+      <div><small>ainda tenho</small><b class="${state.budget!=null&&spentAll>state.budget?'over':''}">${state.budget!=null?eur(state.budget-spentAll):'—'}</b></div>
+      <div><small>se comprar tudo</small><b>${rangeTxt(sumIdeas(all))}</b></div>
+    </div>
+    <div class="summary"><span>pessoas <b>${state.people.length}</b></span><span>ideias <b>${all.length}</b></span><span>compradas <b>${bought}</b></span></div>
+    <form class="add-person" id="addPerson">
+      <div style="flex:1"><label for="newName">Acrescentar alguém à lista</label><input id="newName" placeholder="ex.: Avó Lurdes" autocomplete="off"></div>
+      <button class="primary" type="submit">Acrescentar</button>
+    </form>
+    ${state.people.length?`<ol class="people">${state.people.map((p,idx)=>{
+      const s=sumIdeas(p.ideas), done=p.ideas.length&&p.ideas.every(i=>i.bought), b=p.ideas.filter(i=>i.bought).length;
+      return `<li data-id="${p.id}" title="Abrir a página de ${esc(p.name)}">
+        <span class="n">${idx+1}.</span>
+        <span><span class="name">${esc(p.name)}</span>${p.relation?` <span class="rel">(${esc(p.relation)})</span>`:''}</span>
+        <span class="info">${done?'<span class="tick">✔ tratado</span> · ':''}${p.ideas.length} ${p.ideas.length===1?'ideia':'ideias'}${p.ideas.length?'<br>previsto '+rangeTxt(s):''}${b?'<br>gasto <b>'+eur(spentSum(p.ideas))+'</b>':''}${p.budget!=null?' / '+eur(p.budget):''}</span>
+      </li>`}).join('')}</ol>`:'<p class="empty">A lista ainda está em branco. Comece por escrever o nome de alguém aqui em cima.</p>'}`;
+  $('#addPerson').onsubmit=e=>{
+    e.preventDefault();const n=$('#newName').value.trim();if(!n)return;
+    state.people.push({id:uid(),name:n,relation:'',notes:'',budget:null,ideas:[]});save();render();$('#newName').focus();
+  };
+  $('#editSub').onclick=async()=>{const v=await ask('O que quer escrever por baixo do nome?',{input:'text',value:state.subtitle||'',ok:'Guardar'});if(v===null)return;state.subtitle=v.trim();save();render();setIntroSub()};
+  $('#editBudget').onclick=async()=>{const v=await ask('Quanto quer gastar no total este Natal? (em €, deixe vazio para tirar)',{input:true,value:state.budget??'',ok:'Guardar'});if(v===null)return;state.budget=num(v);save();render()};
+  document.querySelectorAll('.people li').forEach(li=>li.onclick=()=>location.hash='#p-'+li.dataset.id);
+}
+
+function renderPerson(p){
+  document.title=p.name+" · Noel'ist";
+  const s=sumIdeas(p.ideas), spent=spentSum(p.ideas);
+  const idx=state.people.indexOf(p), over=p.budget!=null&&s[0]>p.budget;
+  $('#app').innerHTML=`
+    <button class="link back" data-act="back">← voltar à lista</button>
+    <div class="p-head"><h1>${esc(p.name)}</h1>${p.relation?`<span class="p-meta">(${esc(p.relation)})</span>`:''}</div>
+    ${SQUIGGLE}
+    <div class="budget">
+      <span>orçamento: <b>${p.budget!=null?eur(p.budget):'—'}</b></span>
+      <span>ideias somam: <b class="${over?'over':''}">${rangeTxt(s)}</b></span>
+      <span>já gasto: <b class="${p.budget!=null&&spent>p.budget?'over':''}">${eur(spent)}</b></span>${p.budget!=null?`<span>ainda tenho: <b>${eur(p.budget-spent)}</b></span>`:''}
+    </div>
+    ${over?'<div class="over">As ideias já passam o orçamento. Talvez escolher só algumas!</div>':''}
+    ${p.notes?`<div class="p-meta" style="white-space:pre-wrap">${esc(p.notes)}</div>`:''}
+    <div class="p-tools">
+      <button class="link" data-act="editPerson">editar dados e orçamento</button>
+      <button class="link" data-act="up" ${idx===0?'disabled':''}>subir na lista</button>
+      <button class="link" data-act="down" ${idx===state.people.length-1?'disabled':''}>descer na lista</button>
+      <button class="link" data-act="delPerson">apagar pessoa</button>
+    </div>
+    <div class="ideas">
+      ${p.ideas.map(i=>`
+      <div class="idea ${i.bought?'bought':''}" data-iid="${i.id}">
+        ${i.bought?'<span class="stamp">comprado!</span>':''}
+        ${i.photo?`<div class="photo" data-act="zoom">${imgTag(i.photo,'loading="lazy"')}</div>`:'<div class="photo none">sem imagem</div>'}
+        <h3>${esc(i.title)}</h3>
+        <div class="price">${priceHtml(i)}</div>
+        ${i.bought&&i.paid!=null&&!(i.priceMode==='fixed'&&i.paid===i.price)?`<div class="store">paguei ${eur(i.paid)}</div>`:''}
+        ${(i.store||i.link)?`<div class="store">${i.link?`<a href="${esc(i.link)}" target="_blank" rel="noopener">${esc(i.store||host(i.link))} ↗</a>`:esc(i.store)}</div>`:''}
+        ${i.notes?`<div class="notes">${esc(i.notes)}</div>`:''}
+        <div class="acts">
+          <button class="link" data-act="toggleBought">${i.bought?'desmarcar':'marcar comprado'}</button>
+          <button class="link" data-act="editIdea">editar</button>
+          <button class="link" data-act="delIdea">apagar</button>
+        </div>
+      </div>`).join('')}
+      <button class="add-card" data-act="addIdea">+ nova ideia</button>
+    </div>`;
+  $('#app').onclick=async e=>{
+    const el=e.target.closest('[data-act]');if(!el)return;
+    const card=el.closest('.idea'), i=card&&p.ideas.find(x=>x.id===card.dataset.iid), act=el.dataset.act;
+    if(act==='back'){location.hash='';return}
+    if(act==='addIdea')return openIdea(p);
+    if(act==='editIdea')return openIdea(p,i);
+    if(act==='editPerson')return openPerson(p);
+    if(act==='zoom'){$('#viewer img').src=photoSrc(i.photo);if(!photoSrc(i.photo))photoLoad(i.photo).then(d=>$('#viewer img').src=d);$('#viewer').showModal();return}
+    if(act==='toggleBought')i.bought=!i.bought;
+    if(act==='delIdea'){if(!await ask(`Apagar "${i.title}"?`,{ok:'Apagar'}))return;if(fb&&i.photo&&i.photo.startsWith('ph:'))fb.fs.doc('fotos/'+i.photo.slice(3)).delete().catch(()=>{});p.ideas.splice(p.ideas.indexOf(i),1)}
+    if(act==='delPerson'){if(!await ask(`Apagar ${p.name} e todas as ideias?`,{ok:'Apagar'}))return;state.people.splice(idx,1);save();location.hash='';return}
+    if(act==='up'&&idx>0)[state.people[idx-1],state.people[idx]]=[state.people[idx],state.people[idx-1]];
+    if(act==='down'&&idx<state.people.length-1)[state.people[idx+1],state.people[idx]]=[state.people[idx],state.people[idx+1]];
+    save();render();
+  };
+}
+
+/* ---------- janela pessoa ---------- */
+let editingPerson=null;
+function openPerson(p){
+  editingPerson=p;const f=$('#personForm');
+  f.name.value=p.name;f.relation.value=p.relation||'';f.budget.value=p.budget??'';f.notes.value=p.notes||'';
+  $('#personDlg').showModal();
+}
+$('#personDlg').addEventListener('close',()=>{
+  if($('#personDlg').returnValue!=='ok'||!editingPerson)return;
+  const f=$('#personForm'),p=state.people.find(x=>x.id===editingPerson.id);if(!p)return;
+  p.name=f.name.value.trim()||p.name;p.relation=f.relation.value.trim();p.budget=num(f.budget.value);p.notes=f.notes.value.trim();
+  save();render();
+});
+
+/* ---------- janela ideia ---------- */
+let ideaCtx=null, pendingPhoto='';
+const F=()=>$('#ideaForm');
+function setPaid(){$('#paidRow').style.display=F().bought.checked?'':'none'}
+function setMode(){const m=F().priceMode.value;$('#fixedRow').style.display=m==='fixed'?'':'none';$('#rangeRow').style.display=m==='range'?'':'none'}
+function showPreview(src){pendingPhoto=src||'';$('#photoPreview').innerHTML=src?`${imgTag(src)}<button type="button" class="link" id="rmPhoto">tirar imagem</button>`:'';fillPhotos()}
+function status(msg,cls=''){const s=$('#fetchStatus');s.textContent=msg;s.className='status '+cls}
+$('#photoPreview').addEventListener('click',e=>{if(e.target.id==='rmPhoto'){F().photoUrl.value='';F().photoFile.value='';showPreview('')}});
+function openIdea(p,i){
+  ideaCtx={p,i};const f=F();f.reset();status('');
+  $('#ideaDlgTitle').textContent=i?'Editar ideia':'Ideia para '+p.name;
+  if(i){f.title.value=i.title;f.link.value=i.link||'';f.store.value=i.store||'';f.priceMode.value=i.priceMode||'none';
+    f.price.value=i.price??'';f.min.value=i.min??'';f.max.value=i.max??'';f.notes.value=i.notes||'';f.bought.checked=!!i.bought;f.paid.value=i.paid??'';
+    if(i.photo&&!i.photo.startsWith('data:'))f.photoUrl.value=i.photo;}
+  showPreview(i?i.photo:'');setMode();setPaid();
+  $('#ideaDlg').showModal();
+}
+F().addEventListener('change',e=>{
+  const n=e.target.name;
+  if(n==='priceMode')setMode();
+  if(n==='bought')setPaid();
+  if(n==='photoUrl')showPreview(e.target.value.trim());
+  if(n==='photoFile'&&e.target.files[0])shrink(e.target.files[0]).then(storePhoto).then(showPreview);
+});
+let lastFetched='';
+F().link.addEventListener('change',()=>{const u=F().link.value.trim();if(u&&u!==lastFetched)fillFromLink()});
+F().link.addEventListener('paste',()=>setTimeout(()=>{const u=F().link.value.trim();if(u&&u!==lastFetched)fillFromLink()},50));
+$('#fetchBtn').onclick=()=>fillFromLink(true);
+
+async function fillFromLink(force){
+  const f=F(), url=f.link.value.trim();
+  if(!/^https?:\/\//i.test(url)){status('Cole primeiro um link começado por https://','bad');return}
+  lastFetched=url;
+  if(!f.store.value)f.store.value=storeName(host(url));
+  status('A ir buscar a imagem, o preço e a loja…');$('#fetchBtn').disabled=true;
+  const d=await fetchProduct(url);
+  $('#fetchBtn').disabled=false;
+  if(F().link.value.trim()!==url)return;
+  const got=[];
+  if(d.title&&(force||!f.title.value)){f.title.value=d.title;got.push('nome')}
+  if(d.store){f.store.value=d.store;got.push('loja')}
+  if(d.image&&(force||!pendingPhoto)){f.photoUrl.value=d.image;showPreview(d.image);got.push('imagem')}
+  if(d.price!=null){f.priceMode.value='fixed';f.price.value=d.price.toFixed(2);setMode();got.push('preço')}
+  const miss=['nome','imagem','preço'].filter(x=>!got.includes(x));
+  if(got.length&&!miss.length)status('Encontrei nome, imagem, preço e loja.','ok');
+  else if(got.length)status(`Encontrei: ${got.join(', ')}. Não consegui: ${miss.join(', ')}; pode escrever à mão.`,'ok');
+  else status('Esta loja não deixou ler a página. Pode preencher à mão.','bad');
+}
+function storeName(h){
+  const known={'fnac.pt':'Fnac','worten.pt':'Worten','amazon.es':'Amazon','amazon.com':'Amazon','amazon.de':'Amazon','amazon.fr':'Amazon','wook.pt':'Wook','bertrand.pt':'Bertrand','elcorteingles.pt':'El Corte Inglés','ikea.com':'IKEA','zara.com':'Zara','decathlon.pt':'Decathlon','continente.pt':'Continente','pcdiga.com':'PCDiga','radiopopular.pt':'Radio Popular','kuantokusta.pt':'KuantoKusta','etsy.com':'Etsy','leroymerlin.pt':'Leroy Merlin','sephora.pt':'Sephora','primor.eu':'Primor','notino.pt':'Notino'};
+  if(!h)return'';if(known[h])return known[h];
+  const b=h.split('.').slice(-2)[0]||h;return b.charAt(0).toUpperCase()+b.slice(1);
+}
+const withTimeout=(p,ms)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r('timeout'),ms))]);
+// Os navegadores não deixam uma página ler outras lojas diretamente, por isso usamos dois serviços públicos gratuitos
+async function fetchProduct(url){
+  const out={};
+  const viaMicrolink=withTimeout(fetch('https://api.microlink.io/?url='+encodeURIComponent(url)).then(r=>r.json()),15000).then(j=>{
+    if(j&&j.status==='success'){const d=j.data||{};
+      out.title=out.title||clean(d.title);out.image=out.image||(d.image&&d.image.url)||(d.logo&&null);
+      if(d.publisher)out.store=out.store||clean(d.publisher);}
+  }).catch(()=>{});
+  const viaHtml=withTimeout(fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(url)).then(r=>r.ok?r.text():''),15000).then(html=>{
+    if(!html)return;const doc=new DOMParser().parseFromString(html,'text/html');parseHtml(doc,url,out);
+  }).catch(()=>{});
+  await Promise.all([viaMicrolink,viaHtml]);
+  if(out.image&&out.image.startsWith('/'))try{out.image=new URL(out.image,url).href}catch(e){}
+  return out;
+}
+const clean=s=>s?String(s).replace(/\s+/g,' ').trim():'';
+function parseHtml(doc,url,out){
+  const meta=sel=>{const m=doc.querySelector(sel);return m&&(m.getAttribute('content')||m.getAttribute('value')||m.textContent)};
+  // JSON-LD (Product)
+  for(const s of doc.querySelectorAll('script[type="application/ld+json"]')){
+    let j;try{j=JSON.parse(s.textContent)}catch(e){continue}
+    const stack=[j];
+    while(stack.length){const o=stack.pop();if(!o||typeof o!=='object')continue;
+      if(Array.isArray(o)){stack.push(...o);continue}
+      const t=[].concat(o['@type']||[]);
+      if(t.some(x=>/Product/i.test(x))){
+        out.title=out.title||clean(o.name);
+        const img=Array.isArray(o.image)?o.image[0]:o.image;out.image=out.image||(typeof img==='string'?img:img&&img.url);
+        const offers=[].concat(o.offers||[]);
+        for(const of of offers){const pr=num(of.price??of.lowPrice??(of.priceSpecification&&of.priceSpecification.price));
+          if(pr!=null&&out.price==null)out.price=pr;
+          if(!out.store&&of.seller&&of.seller.name)out.store=clean(of.seller.name);}
+      }
+      if(o['@graph'])stack.push(o['@graph']);
+    }
+  }
+  if(out.price==null)out.price=num(meta('meta[property="product:price:amount"]')??meta('meta[property="og:price:amount"]')??meta('[itemprop="price"]'));
+  out.title=out.title||clean(meta('meta[property="og:title"]')||doc.title);
+  out.image=out.image||meta('meta[property="og:image"]')||meta('meta[name="twitter:image"]');
+  const site=clean(meta('meta[property="og:site_name"]'));if(site)out.store=site;
+}
+async function storePhoto(dataUrl){
+  if(fb){try{const id=uid();await fb.fs.doc('fotos/'+id).set({d:dataUrl,at:Date.now()});photoCache[id]=dataUrl;return 'ph:'+id}catch(e){tell('Não consegui guardar a fotografia. Verifique a ligação à internet.');return ''}}
+  if(!assets)return dataUrl;
+  try{const blob=await (await fetch(dataUrl)).blob();const up=await assets.upload(blob,{type:'image/jpeg'});return '/_blob/'+up.id}
+  catch(e){return dataUrl}
+}
+function shrink(file){
+  return new Promise(res=>{const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{
+    const S=600,k=Math.min(1,S/Math.max(img.width,img.height));const c=document.createElement('canvas');
+    c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    res(c.toDataURL('image/jpeg',.72))};img.src=r.result};r.readAsDataURL(file)});
+}
+$('#ideaDlg').addEventListener('close',()=>{
+  if($('#ideaDlg').returnValue!=='ok'||!ideaCtx)return;
+  const f=F(),p=state.people.find(x=>x.id===ideaCtx.p.id);if(!p)return;
+  const isNew=!ideaCtx.i;let i=isNew?{id:uid()}:p.ideas.find(x=>x.id===ideaCtx.i.id);if(!i)return;
+  Object.assign(i,{title:f.title.value.trim(),link:f.link.value.trim(),store:f.store.value.trim(),priceMode:f.priceMode.value,
+    price:num(f.price.value),min:num(f.min.value),max:num(f.max.value),notes:f.notes.value.trim(),bought:f.bought.checked,paid:f.bought.checked?num(f.paid.value):null,photo:pendingPhoto||''});
+  if(i.min!=null&&i.max!=null&&i.min>i.max)[i.min,i.max]=[i.max,i.min];
+  if(isNew)p.ideas.push(i);
+  if(!save()&&isNew)p.ideas.pop();
+  render();
+});
+
+/* ---------- cópias de segurança ---------- */
+$('#exportBtn').onclick=async()=>{
+  const name=`noelist-${new Date().toISOString().slice(0,10)}.json`;
+  if(downloads){try{await downloads.save({filename:name,data:JSON.stringify(state,null,1)})}catch(e){}return}
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,1)],{type:'application/json'}));
+  a.download=name;a.click();
+};
+$('#importBtn').onclick=()=>$('#importFile').click();
+$('#importFile').onchange=e=>{
+  const file=e.target.files[0];if(!file)return;const r=new FileReader();
+  r.onload=()=>{try{const s=JSON.parse(r.result);if(!Array.isArray(s.people))throw 0;
+    ask('Substituir a lista atual por esta cópia?',{ok:'Substituir'}).then(y=>{if(y){state=s;save();location.hash='';render()}})}catch(err){tell("Este ficheiro não parece uma cópia da Noel'ist.")}};
+  r.readAsText(file);e.target.value='';
+};
+
+render();
+setIntroSub();
+initCloud();
+
+/* ---------- abertura ---------- */
+(function(){
+  const intro=$('#intro');let done=false,y0=null;
+  const open=()=>{if(done)return;done=true;intro.classList.add('opening');
+    const slow=!matchMedia('(prefers-reduced-motion:reduce)').matches;
+    setTimeout(()=>intro.classList.add('gone'),slow?1300:0);setTimeout(()=>intro.remove(),slow?2000:50)};
+  intro.addEventListener('touchstart',e=>{y0=e.touches[0].clientY},{passive:true});
+  intro.addEventListener('touchmove',e=>{if(y0!=null&&y0-e.touches[0].clientY>40)open()},{passive:true});
+  intro.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')y0=e.clientY});
+  intro.addEventListener('pointerup',e=>{if(e.pointerType==='mouse'&&y0!=null&&y0-e.clientY>40)open()});
+  intro.addEventListener('wheel',e=>{if(e.deltaY>10)open()},{passive:true});
+  $('#openScroll').onclick=open;
+  document.addEventListener('keydown',e=>{if(!done&&['Enter',' ','ArrowUp'].includes(e.key))open()});
+})();
+
+</script>
+</body>
+</html>
