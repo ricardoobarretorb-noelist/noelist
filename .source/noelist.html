@@ -335,7 +335,7 @@ function applyRemote(d){
 /* ---------- Firebase (versão instalável) ---------- */
 const AUTH_ERR={'auth/invalid-credential':'Email ou palavra-passe errados.','auth/wrong-password':'Email ou palavra-passe errados.','auth/user-not-found':'Ainda não há conta com este email. Use "Criar conta".',
   'auth/email-already-in-use':'Já existe uma conta com este email. Use "Entrar".','auth/weak-password':'A palavra-passe precisa de pelo menos 6 caracteres.',
-  'auth/invalid-email':'Este email não parece estar bem escrito.','auth/missing-password':'Falta a palavra-passe.','auth/network-request-failed':'Sem ligação à internet.','auth/too-many-requests':'Demasiadas tentativas. Espere um pouco e tente de novo.'};
+  'auth/invalid-email':'Este email não parece estar bem escrito.','auth/missing-password':'Falta a palavra-passe.','auth/network-request-failed':'Sem ligação à internet.','auth/configuration-not-found':'O Firebase ainda não tem o início de sessão por email ativado (Authentication › Email/palavra-passe).','auth/operation-not-allowed':'O Firebase ainda não tem o início de sessão por email ativado (Authentication › Email/palavra-passe).','auth/too-many-requests':'Demasiadas tentativas. Espere um pouco e tente de novo.'};
 function initFirebase(cfg){
   firebase.initializeApp(cfg);
   const auth=firebase.auth(), fs=firebase.firestore();
